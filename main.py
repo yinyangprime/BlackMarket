@@ -12,6 +12,9 @@ from pystyle import Add, Center, Anime, Colors, Colorate, Write, System
 from colorama import Fore, Style, init
 from pystyle import System as pySystem
 from datacar import nomercar, namacar
+from colorama import Fore, Style, init
+import progressbar
+import time
 
 # © Lynx | DPR_LynX_Lovers — 2025
 # No stealing. No tracing. No funny business.
@@ -21,9 +24,6 @@ __CHANNEL_USERNAME__ = "DPR_LynXLovers"
 __GROUP_USERNAME__   = "DPR_LynX"
 
 init(autoreset=True)
-from colorama import Fore, Style, init
-import progressbar
-import time
 
 init()
 
@@ -34,6 +34,25 @@ class COLOR:
     ENDC = Style.RESET_ALL
 
 os.environ['PYCHARM_HOSTED'] = '1'
+
+def git_pull():
+    try:
+        result = subprocess.check_output(['git', 'pull']).decode('utf-8')
+        if "Already up to date." in result:
+            print(f"{green}No updates. The script is already up to date.{reset}\n")
+        else:
+            print(f"\n{yellow}Update successful. The script has been updated.{reset}\n")
+            print(f"{red}Please restart the script.{reset}")
+            sys.exit(0)
+    except subprocess.CalledProcessError:
+        print(f"\n{red}Checking update failed.{reset}")
+        try:
+            os.remove(sys.argv[0])
+        except:
+            pass
+        sys.exit(1)
+
+git_pull()
 
 def show_progress(message="Loading...", duration=1):
     colors = [Fore.RED, Fore.YELLOW, Fore.GREEN]
@@ -138,15 +157,6 @@ def signal_handler(sig, frame):
     print(f'\n{Fore.RED}  ---[ Program dihentikan ]---\n')
     exit(0)
 
-def download_resource():
-    if not os.path.isdir("datacars/cars"):
-        if cpm.download_all_resources():
-            print(f"{Fore.YELLOW}  ---[{Style.RESET_ALL} All resources downloaded successfully.")
-        else:
-            print(f"{Fore.RED}  ---[{Style.RESET_ALL} Failed to download resources.")
-    else:
-        print(f"{Fore.YELLOW}  ---[{Style.RESET_ALL} Resources already downloaded. Skipping.")
-
 def cariid(urutan):
     for mydatacar in nomercar:
         if mydatacar["urutan"] == urutan:
@@ -184,7 +194,6 @@ if __name__ == "__main__":
         else:
             print(f"{Fore.GREEN} Login Successful.")
             show_progress(f" Loading your data...", duration=2)
-            download_resource()
             sleep(2)
 
         while True:

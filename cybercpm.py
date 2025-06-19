@@ -175,21 +175,6 @@ class CyberCPM:
         response = requests.post(f"{BASE_URL}/swap_gearbox_awd", params=params, data=payload)
         response_decoded = response.json()
         return response_decoded.get("ok")
-        
-    def download_all_resources(self) -> bool:
-        payload = {"car_data": "{}"}
-        params = {"key": self.access_key}
-        response = requests.post(f"{BASE_URL}/download_resource", params=params, data=payload)
-        response_decoded = response.json()
-        if not response_decoded.get("ok"):
-            return False
-        cars = response_decoded.get("data", [])
-        os.makedirs("datacars/cars", exist_ok=True)
-        for i, car in enumerate(cars, 1):
-            path = f"datacars/cars/{i}"
-            with open(path, "w") as f:
-                json.dump(car, f, indent=2)
-        return True
 
     def get_all_player_cars(self) -> any:
         payload = { "account_auth": self.auth_token }
