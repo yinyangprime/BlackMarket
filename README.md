@@ -2,7 +2,7 @@
 
 CyberCPM is a powerful tool made to **modify Car Parking Multiplayer 2 accounts** — no root or virtual app required.
 
-You only need an **Access Key**, which you can get from [@CyberCPMbot](https://t.me/CyberCPMbot) for free with **1K Credits Balance**.
+You only need an **Access Key**, which you can get from [@@BlackMarketCPM_BOT](https://t.me/CyberCPMbot) for free with **1K Credits Balance**.
 
 ![Tool Preview](./assets/tool.png)
 
